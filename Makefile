@@ -27,6 +27,9 @@ init:
 	make up
 	docker compose exec -it app composer install
 	docker compose exec -it app php artisan key:generate
+	docker compose exec -it app php artisan config:clear
+	docker compose exec -it app php artisan cache:clear
+	docker compose exec -it app php artisan config:cache
 	docker compose exec -it app php artisan migrate:fresh --seed
 
 # git clone直後の状態に戻す

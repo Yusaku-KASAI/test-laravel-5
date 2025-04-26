@@ -1,8 +1,8 @@
 services:
-  vite:
+  webpack:
     build:
       context: .
-      dockerfile: ./infra/development/vite/Dockerfile
+      dockerfile: ./infra/development/webpack/Dockerfile
     volumes:
       - type: bind
         source: ./laravel
@@ -11,7 +11,7 @@ services:
         source: node_modules
         target: /var/www/html/node_modules
     ports:
-      - "5173:5173"
+      - "38080:8080"
   nginx:
     build: ./infra/development/nginx
     volumes:
@@ -24,9 +24,14 @@ services:
     volumes:
       - ./laravel:/var/www/html
   db:
-    build: ./infra/development/mysql
+    build:
+      context: .
+      dockerfile: ./infra/development/mysql/Dockerfile
     volumes:
       - db-store:/var/lib/mysql
+      # gptより
+      # - ./infra/development/mysql/my.cnf:/etc/mysql/conf.d/my.cnf
+      - ./infra/development/mysql/init:/docker-entrypoint-initdb.d
     ports:
       - "43306:3306"
 

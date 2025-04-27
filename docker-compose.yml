@@ -11,7 +11,7 @@ services:
         source: node_modules
         target: /var/www/html/node_modules
     ports:
-      - "38080:8080"
+      - "8080:8080" # laravelのhelperのmix関数のドメインは8080で固定なので
   nginx:
     build: ./infra/development/nginx
     volumes:

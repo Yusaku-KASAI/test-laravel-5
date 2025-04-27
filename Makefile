@@ -30,7 +30,7 @@ init:
 	docker compose exec -it app php artisan config:clear
 	docker compose exec -it app php artisan cache:clear
 	docker compose exec -it app php artisan config:cache
-	docker compose exec -it app php artisan migrate:fresh --seed
+	docker compose exec -it app php artisan migrate:refresh --seed
 
 # git clone直後の状態に戻す
 .PHONY: destroy
